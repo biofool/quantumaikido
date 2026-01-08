@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Post Helper</title>
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #334155;
+            --accent: #8b5cf6;
+            --accent-light: #a78bfa;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --border: #475569;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--bg-secondary);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            color: var(--accent-light);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-light);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        .btn-copy {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-copy:hover {
+            background: #16a34a;
+        }
+
+        .folder-path {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-muted);
+        }
+
+        .empty-state h2 {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .stats {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-light);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .video-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .card-header {
+            padding: 1rem;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .card-filename {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            word-break: break-all;
+        }
+
+        .card-body {
+            padding: 1rem;
+        }
+
+        .caption-preview {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            max-height: 80px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .caption-empty {
+            color: var(--warning);
+            font-style: italic;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .card-actions .btn {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-ready {
+            background: var(--success);
+            color: white;
+        }
+
+        .badge-empty {
+            background: var(--warning);
+            color: black;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--success);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Filter tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-tab {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-tab:hover {
+            border-color: var(--accent);
+            color: var(--accent-light);
+        }
+
+        .filter-tab.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        /* Video preview */
+        .video-preview {
+            width: 100%;
+            height: 180px;
+            background: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 3rem;
+        }
+
+        /* Instructions panel */
+        .instructions-panel {
+            position: fixed;
+            top: 0;
+            right: -500px;
+            width: 480px;
+            max-width: 90vw;
+            height: 100vh;
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border);
+            z-index: 200;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .instructions-panel.open {
+            right: 0;
+        }
+
+        .instructions-header {
+            padding: 1rem 1.5rem;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+        }
+
+        .instructions-header h2 {
+            font-size: 1.2rem;
+            color: var(--accent-light);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.25rem 0.5rem;
+        }
+
+        .close-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .instructions-content {
+            padding: 1.5rem;
+        }
+
+        .instructions-content h3 {
+            color: var(--accent-light);
+            font-size: 1rem;
+            margin: 1.5rem 0 0.75rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .instructions-content h3:first-child {
+            margin-top: 0;
+        }
+
+        .instructions-content p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+
+        .instructions-content ol, .instructions-content ul {
+            color: var(--text-secondary);
+            margin-left: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .instructions-content li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .instructions-content a {
+            color: var(--accent-light);
+            text-decoration: none;
+        }
+
+        .instructions-content a:hover {
+            text-decoration: underline;
+        }
+
+        .platform-card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .platform-card h4 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tip-box {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .tip-box strong {
+            color: var(--accent-light);
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.75rem 0;
+            font-size: 0.85rem;
+        }
+
+        .specs-table td {
+            padding: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .specs-table td:first-child {
+            color: var(--text-muted);
+            width: 40%;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 150;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div>
+            <h1>Video Post Helper</h1>
+            <span class="folder-path" id="folderPath">No folder selected</span>
+        </div>
+        <div class="header-actions">
+            <button class="btn btn-secondary" id="helpBtn">? How to Post</button>
+            <button class="btn btn-primary" id="selectFolderBtn">Select Folder</button>
+            <button class="btn btn-secondary" id="refreshBtn" style="display: none;">Refresh</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="emptyState" class="empty-state">
+            <h2>Welcome to Video Post Helper</h2>
+            <p>Click "Select Folder" to choose your video folder.</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">
+                This app helps you post videos to Facebook, Instagram, and Buffer.<br>
+                Copy captions with one click, then navigate to your files to drag them.
+            </p>
+        </div>
+
+        <div id="content" style="display: none;">
+            <div class="stats" id="stats"></div>
+
+            <div class="filter-tabs" id="filterTabs">
+                <button class="filter-tab active" data-filter="all">All</button>
+                <button class="filter-tab" data-filter="ready">Ready to Post</button>
+                <button class="filter-tab" data-filter="empty">Needs Caption</button>
+            </div>
+
+            <div class="cards-grid" id="cardsGrid"></div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">Copied to clipboard!</div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="instructions-panel" id="instructionsPanel">
+        <div class="instructions-header">
+            <h2>How to Post Videos</h2>
+            <button class="close-btn" id="closeInstructions">&times;</button>
+        </div>
+        <div class="instructions-content">
+            <h3>Quick Workflow</h3>
+            <ol>
+                <li><strong>Copy Caption</strong> - Click the green button on any video card</li>
+                <li><strong>Open your folder</strong> - Navigate to your video files in File Explorer</li>
+                <li><strong>Go to Instagram/Facebook</strong> - Open in another browser tab</li>
+                <li><strong>Upload video</strong> - Drag from File Explorer to the upload area</li>
+                <li><strong>Paste caption</strong> - Press Ctrl+V in the caption field</li>
+            </ol>
+
+            <h3>Posting to Instagram (Desktop)</h3>
+
+            <div class="platform-card">
+                <h4>Option 1: Instagram.com (Easiest)</h4>
+                <ol>
+                    <li>Go to <a href="https://instagram.com" target="_blank">instagram.com</a></li>
+                    <li>Click the <strong>+</strong> (Create) button in the top menu</li>
+                    <li>Drag your video file or click "Select from computer"</li>
+                    <li>Crop/trim if needed, click Next</li>
+                    <li>Add filters if desired, click Next</li>
+                    <li>Paste your caption (Ctrl+V), add hashtags</li>
+                    <li>Click Share</li>
+                </ol>
+            </div>
+
+            <div class="platform-card">
+                <h4>Option 2: Meta Business Suite (Business Accounts)</h4>
+                <ol>
+                    <li>Go to <a href="https://business.facebook.com" target="_blank">business.facebook.com</a></li>
+                    <li>Select your Instagram account</li>
+                    <li>Click "Create Post" or "Create Reel"</li>
+                    <li>Upload your video</li>
+                    <li>Paste caption and schedule or publish</li>
+                </ol>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Best for: Scheduling posts, managing multiple accounts, viewing insights</p>
+            </div>
+
+            <div class="tip-box">
+                <strong>Pro Tip:</strong> For Reels, use Meta Business Suite to schedule posts in advance. You can batch upload multiple videos and schedule them throughout the week.
+            </div>
+
+            <h3>Posting to Facebook</h3>
+            <ol>
+                <li>Go to <a href="https://facebook.com" target="_blank">facebook.com</a></li>
+                <li>Click "Photo/Video" in the post composer</li>
+                <li>Drag your video from File Explorer</li>
+                <li>Paste your caption (Ctrl+V)</li>
+                <li>Click Post</li>
+            </ol>
+
+            <h3>Using Buffer (Scheduling)</h3>
+            <ol>
+                <li>Go to <a href="https://buffer.com" target="_blank">buffer.com</a></li>
+                <li>Connect your Instagram/Facebook accounts</li>
+                <li>Click "Create Post"</li>
+                <li>Upload video and paste caption</li>
+                <li>Schedule for optimal posting times</li>
+            </ol>
+
+            <h3>Instagram Video Requirements</h3>
+            <table class="specs-table">
+                <tr>
+                    <td>Format</td>
+                    <td>MP4 (H.264 codec)</td>
+                </tr>
+                <tr>
+                    <td>Reels Length</td>
+                    <td>Up to 90 seconds</td>
+                </tr>
+                <tr>
+                    <td>Feed Video</td>
+                    <td>Up to 60 minutes</td>
+                </tr>
+                <tr>
+                    <td>Aspect Ratio</td>
+                    <td>9:16 (Reels), 1:1 or 4:5 (Feed)</td>
+                </tr>
+                <tr>
+                    <td>Resolution</td>
+                    <td>1080x1920 (Reels), 1080x1080 (Square)</td>
+                </tr>
+                <tr>
+                    <td>Max File Size</td>
+                    <td>4GB</td>
+                </tr>
+            </table>
+
+            <h3>Hashtag Tips</h3>
+            <ul>
+                <li>Use 5-15 relevant hashtags per post</li>
+                <li>Mix popular and niche hashtags</li>
+                <li>Suggested: #aikido #martialarts #quantumaikido #harmony #mindfulness #budo #japanesemartialarts</li>
+            </ul>
+
+            <div class="tip-box">
+                <strong>Best Posting Times:</strong> Tuesday-Friday, 11am-1pm or 7pm-9pm in your target timezone. Use Buffer or Meta Business Suite to schedule posts.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let folderHandle = null;
+        let videoData = [];
+        let currentFilter = 'all';
+
+        const selectFolderBtn = document.getElementById('selectFolderBtn');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const folderPath = document.getElementById('folderPath');
+        const emptyState = document.getElementById('emptyState');
+        const content = document.getElementById('content');
+        const cardsGrid = document.getElementById('cardsGrid');
+        const stats = document.getElementById('stats');
+        const toast = document.getElementById('toast');
+        const filterTabs = document.getElementById('filterTabs');
+        const helpBtn = document.getElementById('helpBtn');
+        const instructionsPanel = document.getElementById('instructionsPanel');
+        const closeInstructions = document.getElementById('closeInstructions');
+        const overlay = document.getElementById('overlay');
+
+        // Instructions panel toggle
+        function openInstructions() {
+            instructionsPanel.classList.add('open');
+            overlay.classList.add('show');
+        }
+
+        function closeInstructionsPanel() {
+            instructionsPanel.classList.remove('open');
+            overlay.classList.remove('show');
+        }
+
+        helpBtn.addEventListener('click', openInstructions);
+        closeInstructions.addEventListener('click', closeInstructionsPanel);
+        overlay.addEventListener('click', closeInstructionsPanel);
+
+        // Check for File System Access API support
+        if (!('showDirectoryPicker' in window)) {
+            emptyState.innerHTML = `
+                <h2>Browser Not Supported</h2>
+                <p>This app requires Chrome or Edge browser.</p>
+                <p style="margin-top: 1rem;">The File System Access API is not available in your current browser.</p>
+            `;
+            selectFolderBtn.disabled = true;
+        }
+
+        selectFolderBtn.addEventListener('click', async () => {
+            try {
+                folderHandle = await window.showDirectoryPicker();
+                folderPath.textContent = folderHandle.name;
+                refreshBtn.style.display = 'inline-block';
+                await scanFolder();
+            } catch (err) {
+                if (err.name !== 'AbortError') {
+                    console.error('Error selecting folder:', err);
+                    showToast('Error selecting folder');
+                }
+            }
+        });
+
+        refreshBtn.addEventListener('click', scanFolder);
+
+        filterTabs.addEventListener('click', (e) => {
+            if (e.target.classList.contains('filter-tab')) {
+                filterTabs.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                e.target.classList.add('active');
+                currentFilter = e.target.dataset.filter;
+                renderCards();
+            }
+        });
+
+        async function scanFolder() {
+            if (!folderHandle) return;
+
+            videoData = [];
+            const files = {};
+
+            // Collect all files
+            for await (const entry of folderHandle.values()) {
+                if (entry.kind === 'file') {
+                    const name = entry.name;
+                    const baseName = name.replace(/\.(mp4|json)$/i, '');
+
+                    if (!files[baseName]) {
+                        files[baseName] = {};
+                    }
+
+                    if (name.endsWith('.mp4')) {
+                        files[baseName].video = entry;
+                        files[baseName].videoName = name;
+                    } else if (name.endsWith('.json')) {
+                        files[baseName].json = entry;
+                    }
+                }
+            }
+
+            // Process pairs
+            for (const [baseName, fileSet] of Object.entries(files)) {
+                if (fileSet.video) {
+                    let metadata = { title_text: '', caption_text: '' };
+
+                    if (fileSet.json) {
+                        try {
+                            const jsonFile = await fileSet.json.getFile();
+                            const jsonText = await jsonFile.text();
+                            metadata = JSON.parse(jsonText);
+                        } catch (err) {
+                            console.error('Error reading JSON:', err);
+                        }
+                    }
+
+                    videoData.push({
+                        baseName,
+                        videoName: fileSet.videoName,
+                        videoHandle: fileSet.video,
+                        title: metadata.title_text || baseName.substring(0, 50),
+                        caption: metadata.caption_text || '',
+                        hasCaption: !!metadata.caption_text
+                    });
+                }
+            }
+
+            // Sort by title
+            videoData.sort((a, b) => a.title.localeCompare(b.title));
+
+            emptyState.style.display = 'none';
+            content.style.display = 'block';
+
+            updateStats();
+            renderCards();
+        }
+
+        function updateStats() {
+            const total = videoData.length;
+            const ready = videoData.filter(v => v.hasCaption).length;
+            const empty = total - ready;
+
+            stats.innerHTML = `
+                <div class="stat">
+                    <div class="stat-value">${total}</div>
+                    <div class="stat-label">Total Videos</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">${ready}</div>
+                    <div class="stat-label">Ready to Post</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">${empty}</div>
+                    <div class="stat-label">Need Captions</div>
+                </div>
+            `;
+        }
+
+        function renderCards() {
+            let filtered = videoData;
+
+            if (currentFilter === 'ready') {
+                filtered = videoData.filter(v => v.hasCaption);
+            } else if (currentFilter === 'empty') {
+                filtered = videoData.filter(v => !v.hasCaption);
+            }
+
+            cardsGrid.innerHTML = filtered.map((video, index) => `
+                <div class="video-card" data-index="${index}">
+                    <div class="video-preview">&#127909;</div>
+                    <div class="card-header">
+                        <div class="card-title">${escapeHtml(video.title)}</div>
+                        <div class="card-filename">${escapeHtml(video.videoName)}</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="caption-preview ${video.hasCaption ? '' : 'caption-empty'}">
+                            ${video.hasCaption
+                                ? escapeHtml(video.caption.substring(0, 150)) + (video.caption.length > 150 ? '...' : '')
+                                : 'No caption text available'
+                            }
+                        </div>
+                        <div style="margin-bottom: 0.75rem;">
+                            <span class="badge ${video.hasCaption ? 'badge-ready' : 'badge-empty'}">
+                                ${video.hasCaption ? 'Ready' : 'No Caption'}
+                            </span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn btn-copy" onclick="copyCaption(${videoData.indexOf(video)})">
+                                Copy Caption
+                            </button>
+                            <button class="btn btn-secondary" onclick="copyFilename(${videoData.indexOf(video)})">
+                                Copy Filename
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function copyCaption(index) {
+            const video = videoData[index];
+            const text = video.title + (video.caption ? '\n\n' + video.caption : '');
+
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast('Caption copied to clipboard!');
+            } catch (err) {
+                console.error('Failed to copy:', err);
+                showToast('Failed to copy');
+            }
+        }
+
+        async function copyFilename(index) {
+            const video = videoData[index];
+
+            try {
+                await navigator.clipboard.writeText(video.videoName);
+                showToast('Filename copied!');
+            } catch (err) {
+                console.error('Failed to copy:', err);
+                showToast('Failed to copy');
+            }
+        }
+
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>
