@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Aikido: The Power of Harmony - Richard Moon</title>
+    <meta name="description" content="What if conflict wasn't something to win or lose, but energy waiting to be transformed? Richard Moon's revolutionary book reveals how quantum principles govern human consciousness.">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-bg: #0f172a;
+            --secondary-bg: #1e293b;
+            --accent: #8b5cf6;
+            --accent-light: #a78bfa;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border: #334155;
+        }
+        
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Typography */
+        h1, h2, h3 {
+            font-weight: 300;
+            letter-spacing: -0.02em;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            line-height: 1.1;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        a {
+            color: var(--accent-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--accent);
+        }
+        
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        section:last-of-type {
+            border-bottom: none;
+        }
+        
+        /* Header */
+        header {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-light);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 2rem 0;
+        }
+
+        .hero-header {
+            position: sticky;
+            top: 0;
+            background-color: var(--primary-bg);
+            padding: 0.75rem 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: var(--accent-light);
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-header .book-cover {
+            max-width: 80px;
+            height: auto;
+        }
+        
+        .release-date {
+            color: var(--accent);
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+        
+        .lead {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 0;
+            line-height: 1.4;
+        }
+        
+        .book-cover {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+        }
+        
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+        
+        .btn-secondary {
+            border: 1px solid var(--accent);
+            color: var(--accent-light);
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(139, 92, 246, 0.1);
+        }
+        
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+        
+        .other-books {
+            background-color: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        
+        .book-item {
+            display: flex;
+            gap: 1rem;
+            align-items: start;
+        }
+        
+        .book-item img {
+            width: 80px;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .book-info h4 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .book-info p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        /* Resources */
+        .resources-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .resource-link {
+            display: block;
+            padding: 1rem 1.5rem;
+            background-color: var(--secondary-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .resource-link:hover {
+            border-color: var(--accent);
+            background-color: rgba(139, 92, 246, 0.1);
+        }
+        
+        /* Video */
+        .video-container {
+            background-color: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .video-placeholder {
+            aspect-ratio: 16 / 9;
+            background-color: var(--primary-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        
+        /* Concepts */
+        .concepts-list {
+            display: grid;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .concept {
+            background-color: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+        }
+        
+        .concept h3 {
+            color: var(--accent-light);
+        }
+        
+        .concept-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+        
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a {
+            color: var(--text-muted);
+        }
+        
+        .footer-section a:hover {
+            color: var(--accent-light);
+        }
+        
+        /* Carousel */
+        .carousel-section {
+            background-color: var(--secondary-bg);
+        }
+
+        .carousel-container {
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .carousel-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 0.5rem 0;
+            flex: 1;
+        }
+
+        .carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-item {
+            flex: 0 0 280px;
+            min-width: 280px;
+            background-color: var(--secondary-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.75rem;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .carousel-item:hover {
+            border-color: var(--accent);
+        }
+
+        .carousel-item h4 {
+            color: var(--accent-light);
+            margin: 0 0 0.2rem 0;
+            font-size: 0.85rem;
+        }
+
+        .carousel-item p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.35;
+        }
+
+        .carousel-btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .carousel-btn:hover {
+            background-color: var(--accent-light);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.75rem;
+            }
+            
+            .hero-grid,
+            .about-grid,
+            .footer-grid,
+            .hero-footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero {
+                padding: 3rem 0;
+            }
+            
+            section {
+                padding: 3rem 0;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">QUANTUM AIKIDO</div>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#concepts">Concepts</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#order" style="color: var(--accent-light);">Order</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Sticky Header -->
+        <div class="hero-header">
+            <div class="container">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <img src="BookHeadShot.png" alt="Quantum Aikido by Richard Moon" class="book-cover">
+                        <div class="hero-content">
+                            <h1>Quantum Aikido</h1>
+                            <p class="subtitle">The Power of Harmony</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.25rem; align-items: flex-end;">
+                        <a href="https://www.barnesandnoble.com/w/quantum-aikido-richard-moon/1147150498?ean=9781644119785" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;">📱 Barnes & Noble $14.99</a>
+                        <a href="https://www.barnesandnoble.com/w/quantum-aikido-richard-moon/1147150498?ean=9781644119785" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;">📖 Barnes & Noble $19.99</a>
+                        <a href="https://www.amazon.com/Quantum-Aikido-Harmony-Richard-Moon/dp/1644119773" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;">📖 Amazon $19.99</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- What Readers Are Saying -->
+            <div style="margin-top: 1rem;">
+                <h3 style="text-align: center; margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.9rem;">What Readers Are Saying</h3>
+                <div class="carousel-container">
+                    <div class="carousel-wrapper">
+                        <button class="carousel-btn" onclick="scrollTestimonials(-1)">&#8249;</button>
+                        <div class="carousel-track" id="testimonialCarousel">
+                            <!-- Testimonials loaded dynamically from JS -->
+                        </div>
+                        <button class="carousel-btn" onclick="scrollTestimonials(1)">&#8250;</button>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                const testimonials = [
+                    {
+                        name: "Gary David, Ph.D.",
+                        quote: "I've known Richard Moon for over 40 years. His way of guiding sneaks up on you with the subtlety of breeze. 'Quantum Aikido' offers a poetic synthesis of his life's work. In it, he illuminates Aikido as learning to live in deeper participation with self-world."
+                    },
+                    {
+                        name: "Christopher Thorsen",
+                        title: "Radical Inquiry",
+                        quote: "In Quantum Aikido, Sensei Moon has captured light in a bottle! Simplicity itself, when facing challenges, Feel More. Just notice what's actually arising, directly experiencing the immediate, tingling presence of being itself - no further seeking necessary."
+                    },
+                    {
+                        name: "Joel & Michelle Levey",
+                        title: "Co-founders, Wisdom at Work",
+                        quote: "Nadeau's inspiring somatic, energetic, and spiritual teachings link our hearts, minds, and bodies to the lineage of direct transmission of the transformational art of Aikido that flowed from O'Sensei, to him, and on to all of us seeking wise paths to peace in these turbulent times."
+                    },
+                    {
+                        name: "Elisabet Lahti, PhD",
+                        title: "Author of Gentle Power",
+                        quote: "In an age where we are drowning in information on how to be happy and live healthier—yet suffering from dis-ease in both arenas—Richard Moon's experience-based wisdom offers a missing link. The answers have always been within us, and Quantum Aikido paves a path to reconnect with what the body already knows."
+                    },
+                    {
+                        name: "Richard Strozzi-Heckler",
+                        title: "7th Degree Black Belt Aikido Shihan",
+                        quote: "If you are interested in a transformative path involving a deep connection with self and others, an embodied spiritual practice, and unifying with a universal energy, I highly recommend Quantum Aikido."
+                    },
+                    {
+                        name: "Robert Nadeau",
+                        quote: "Richard Moon has always liked delving into the energy aspects of life. This book, his latest endeavor, is useful and engaging."
+                    },
+                    {
+                        name: "Peter Ralston",
+                        quote: "Richard is a committed teacher and investigator, daring to push the envelope attempting to discover deeper truths. The cutting edge of quantum physics and its role in our lives is a new and interesting frontier."
+                    },
+                    {
+                        name: "Hiroshi Ikeda",
+                        quote: "Richard Moon Sensei is a leader who has contributed greatly to the world of Aikido for many years. I believe this book will be a page that opens a new door for those who will be practicing Aikido in the future."
+                    },
+                    {
+                        name: "Robert Lengel",
+                        quote: "Quantum Aikido is a brilliant overview of the power of blending the art of attention with the science of action. It is a must-read guide to learning how to dance in an emerging world where it is getting harder to hear the music."
+                    },
+                    {
+                        name: "Peter Goodman",
+                        title: "Publisher, Stone Bridge Press",
+                        quote: "The dynamic of human consciousness interacting with the Universe can be highly energized, meditative, inspiring, and even community building. Richard Moon shows how our individual spirit can connect with broader energies by replacing confrontation with a comfort born of acceptance and open curiosity. This is an astonishing and profoundly instructive book."
+                    },
+                    {
+                        name: "Bob Noha",
+                        title: "Aikido 7th dan, Chief Instructor Aikido of Petaluma",
+                        quote: "In language that is both lyrical and clear, Richard shows us the underlying unity of creation. He does this through the perspectives of quantum physics, music and the Japanese martial art of Aikido. These multiple perspectives point to the underlying unity of ourselves with the universe at large."
+                    }
+                ];
+
+                // Render testimonials
+                const testimonialCarousel = document.getElementById('testimonialCarousel');
+                testimonials.forEach(t => {
+                    const item = document.createElement('div');
+                    item.className = 'carousel-item';
+                    item.innerHTML = `
+                        <h4>${t.name}</h4>
+                        ${t.title ? `<p style="font-size: 0.7rem; color: var(--accent); margin-bottom: 0.25rem;">${t.title}</p>` : ''}
+                        <p>"${t.quote}"</p>
+                    `;
+                    testimonialCarousel.appendChild(item);
+                });
+
+                // Auto-scroll testimonials
+                let autoScrollInterval;
+                function startAutoScroll() {
+                    autoScrollInterval = setInterval(() => {
+                        const carousel = document.getElementById('testimonialCarousel');
+                        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+                        if (carousel.scrollLeft >= maxScroll - 10) {
+                            carousel.scrollTo({ left: 0, behavior: 'smooth' });
+                        } else {
+                            carousel.scrollBy({ left: 290, behavior: 'smooth' });
+                        }
+                    }, 4000);
+                }
+
+                // Pause on hover
+                testimonialCarousel.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
+                testimonialCarousel.addEventListener('mouseleave', startAutoScroll);
+
+                // Start auto-scroll
+                startAutoScroll();
+            </script>
+
+            <!-- Hero Footer: Buy, Resources, Socials -->
+            <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+                <div class="hero-footer-grid" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; text-align: center;">
+
+                    <!-- Buy Section -->
+                    <div>
+                        <h4 style="margin-bottom: 0.5rem;">Get the Book</h4>
+                        <p style="font-size: 0.85rem; margin-bottom: 0.5rem;"><strong>$19.99</strong> Paperback</p>
+                        <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.85rem;">
+                            <a href="https://www.barnesandnoble.com/w/quantum-aikido-richard-moon/1147150498?ean=9781644119785" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 0.5rem;">📱 Barnes & Noble eBook - $14.99</a>
+                            <a href="https://www.amazon.com/Quantum-Aikido-Harmony-Richard-Moon/dp/1644119773" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.5rem;">📖 Amazon - $19.99</a>
+                            <a href="https://www.barnesandnoble.com/w/quantum-aikido-richard-moon/1147150498?ean=9781644119785" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.5rem;">📖 Barnes & Noble - $19.99</a>
+                            <a href="https://www.innertraditions.com/quantum-aikido" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.5rem;">📖 Inner Traditions - $19.99</a>
+                        </div>
+                    </div>
+
+                    <!-- Diving Deeper - Free Books -->
+                    <div>
+                        <h4 style="margin-bottom: 0.5rem;">Diving Deeper</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;">Free PDF Downloads</p>
+                        <div style="display: flex; flex-direction: column; gap: 0.25rem; max-height: 180px; overflow-y: auto; font-size: 0.8rem;">
+                            <a href="tpoel.pdf" download class="resource-link" style="padding: 0.4rem 0.8rem;">The Power of Extraordinary Listening</a>
+                            <a href="TheBusinessofListening.pdf" download class="resource-link" style="padding: 0.4rem 0.8rem;">The Business of Listening</a>
+                            <a href="Lifein3EasyLessons.pdf" download class="resource-link" style="padding: 0.4rem 0.8rem;">Life in 3 Easy Lessons</a>
+                            <a href="AFYL.pdf" download class="resource-link" style="padding: 0.4rem 0.8rem;">Accounting For Your Life</a>
+                            <a href="TenToTheTenth.pdf" download class="resource-link" style="padding: 0.4rem 0.8rem;">Ten to the Tenth</a>
+                            <a href="AdventuresinAiki-land.pdf" download class="resource-link" style="padding: 0.4rem 0.8rem;">Adventures In Aiki-land</a>
+                            <a href="ThalamicDiscourses.pdf" download class="resource-link" style="padding: 0.4rem 0.8rem;">The Thalamic Discourses</a>
+                            <a href="River.pdf" download class="resource-link" style="padding: 0.4rem 0.8rem;">The Endless River</a>
+                            <a href="Egbert.pdf" download class="resource-link" style="padding: 0.4rem 0.8rem;">Aikido & Transformation in Ebert</a>
+                            <a href="HealingWithKi.pdf" download class="resource-link" style="padding: 0.4rem 0.8rem;">Healing With Ki</a>
+                        </div>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div>
+                        <h4 style="margin-bottom: 0.5rem;">Connect</h4>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <a href="https://www.youtube.com/@moonsensei" target="_blank" rel="noopener noreferrer" class="resource-link">▶️ YouTube</a>
+                            <a href="https://www.createabeautifulworld.org/" target="_blank" rel="noopener noreferrer" class="resource-link">🌐 Website</a>
+                            <a href="https://www.instagram.com/quantumaikido/" target="_blank" rel="noopener noreferrer" class="resource-link">📷 Instagram</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Concepts -->
+    <section id="concepts">
+        <div class="container">
+            <h2 style="text-align: center;">What You'll Discover</h2>
+            <p style="text-align: center; color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem;">Transform conflict into creative harmony through quantum principles</p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                <div class="concept">
+                    <h3>WIGO</h3>
+                    <p class="concept-subtitle">What Is Really Going On</p>
+                    <p>See beneath surface appearances. Multiple realities exist until observation collapses them.</p>
+                </div>
+
+                <div class="concept">
+                    <h3>The Quantum Pause</h3>
+                    <p class="concept-subtitle">Between Stimulus and Response</p>
+                    <p>The space where infinite possibility exists—from reaction to creative response.</p>
+                </div>
+
+                <div class="concept">
+                    <h3>Observer Effect</h3>
+                    <p class="concept-subtitle">Your State Creates Reality</p>
+                    <p>The same principles governing subatomic particles govern human interaction.</p>
+                </div>
+
+                <div class="concept">
+                    <h3>Energy Transformation</h3>
+                    <p class="concept-subtitle">Conflict as Creative Force</p>
+                    <p>Conflict isn't something to win or lose, but energy waiting to be transformed.</p>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 2rem;"><a href="#resources" style="color: var(--accent-light);">Plus: The Unified Field, Cyprus Peace Negotiations, Radical Hope & more →</a></p>
+        </div>
+    </section>
+
+    <!-- About Richard Moon -->
+    <section id="about">
+        <div class="container">
+            <h2 style="text-align: center;">About the Author</h2>
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <p style="font-size: 1.1rem;">Richard Moon is a <strong>6th Dan Aikido sensei</strong>, <strong>international peace negotiator</strong>, and founder of Extraordinary Listening. His work bridges ancient wisdom with modern physics—from personal transformation to peace negotiations in Cyprus.</p>
+                <p class="lead" style="font-style: italic; color: var(--accent-light); margin-top: 1.5rem;">"The sword that cuts things together is sharper than the sword that cuts things apart."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="carousel-section">
+        <div class="container">
+            <h2 style="text-align: center;">Go Deeper</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Free resources and guided learning</p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; margin-bottom: 3rem;">
+                <div class="video-container">
+                    <h3>Video Introduction</h3>
+                    <div class="video-placeholder">
+                        <a href="https://www.youtube.com/playlist?list=PLsY5cGNN2qQMuvKWVPrQTjhkfxkJztu1W" target="_blank" rel="noopener noreferrer">▶ Watch Playlist</a>
+                    </div>
+                </div>
+
+                <div style="background-color: var(--primary-bg); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border);">
+                    <h3 style="margin-bottom: 1rem;">Free Downloads</h3>
+                    <a href="create-a-beautiful-world.pdf" download class="resource-link" style="margin-bottom: 0.5rem;">↓ Create a Beautiful World (PDF)</a>
+                    <a href="https://createabeautifulworld.org/extraordinarylistening/books.html" target="_blank" rel="noopener noreferrer" class="resource-link">View All Books →</a>
+                </div>
+
+                <div style="background-color: var(--primary-bg); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border);">
+                    <h3 style="margin-bottom: 1rem;">Other Books</h3>
+                    <div class="book-item">
+                        <img src="TheArtOT-Nadeau.webp" alt="The Art of Transformation" style="width: 60px;">
+                        <div class="book-info">
+                            <h4>The Art of Transformation</h4>
+                            <p>Conscious change through Aikido philosophy.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Electronic Coachings -->
+            <h3 style="text-align: center; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">Electronic Coachings</h3>
+            <div class="carousel-container">
+                <div class="carousel-wrapper">
+                    <button class="carousel-btn" onclick="scrollCoachings(-1)">&#8249;</button>
+                    <div class="carousel-track" id="coachingCarousel">
+                        <div class="carousel-item">
+                            <h4>Coaching Title 1</h4>
+                            <p>Description of this coaching program goes here.</p>
+                        </div>
+                        <div class="carousel-item">
+                            <h4>Coaching Title 2</h4>
+                            <p>Description of this coaching program goes here.</p>
+                        </div>
+                        <div class="carousel-item">
+                            <h4>Coaching Title 3</h4>
+                            <p>Description of this coaching program goes here.</p>
+                        </div>
+                        <div class="carousel-item">
+                            <h4>Coaching Title 4</h4>
+                            <p>Description of this coaching program goes here.</p>
+                        </div>
+                    </div>
+                    <button class="carousel-btn" onclick="scrollCoachings(1)">&#8250;</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function scrollCoachings(direction) {
+            const carousel = document.getElementById('coachingCarousel');
+            const scrollAmount = 290;
+            carousel.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        }
+
+        function scrollTestimonials(direction) {
+            const carousel = document.getElementById('testimonialCarousel');
+            const scrollAmount = 290;
+            carousel.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        }
+
+        // Auto-scroll coachings
+        let coachingAutoScroll;
+        function startCoachingAutoScroll() {
+            coachingAutoScroll = setInterval(() => {
+                const carousel = document.getElementById('coachingCarousel');
+                const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+                if (carousel.scrollLeft >= maxScroll - 10) {
+                    carousel.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    carousel.scrollBy({ left: 290, behavior: 'smooth' });
+                }
+            }, 4000);
+        }
+
+        const coachingCarousel = document.getElementById('coachingCarousel');
+        if (coachingCarousel) {
+            coachingCarousel.addEventListener('mouseenter', () => clearInterval(coachingAutoScroll));
+            coachingCarousel.addEventListener('mouseleave', startCoachingAutoScroll);
+            startCoachingAutoScroll();
+        }
+    </script>
+
+    <!-- Final CTA / Order Section -->
+    <section id="order">
+        <div class="container" style="text-align: center;">
+            <h2>Get Your Copy Today</h2>
+            <p style="font-size: 1.25rem; margin-bottom: 0.5rem;"><strong>$19.99</strong> Paperback &nbsp;|&nbsp; <strong>$14.99</strong> eBook</p>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Published by Inner Traditions / Park Street Press</p>
+
+            <div class="btn-group" style="justify-content: center;">
+                <a href="https://www.amazon.com/Quantum-Aikido-Harmony-Richard-Moon/dp/1644119773" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Order from Amazon</a>
+                <a href="https://www.barnesandnoble.com/w/quantum-aikido-richard-moon/1147150498?ean=9781644119785" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Barnes & Noble</a>
+                <a href="https://www.innertraditions.com/quantum-aikido" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Inner Traditions</a>
+            </div>
+
+            <p class="lead" style="margin-top: 3rem; font-style: italic; color: var(--accent-light);">"Standing on the floating bridge of heaven: where 1+1=1"</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>Quantum Aikido</h4>
+                    <p style="font-size: 0.875rem;">© 2026 Richard Moon<br>Published by Park Street Press</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="mailto:moonsensei@gmail.com">moonsensei@gmail.com</a></li>
+                        <li><a href="https://extraordinarylistening.com" target="_blank" rel="noopener noreferrer">Extraordinary Listening</a></li>
+                        <li><a href="https://createabeautifulworld.org" target="_blank" rel="noopener noreferrer">Create a Beautiful World</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="#about">About Richard</a></li>
+                        <li><a href="#concepts">Core Concepts</a></li>
+                        <li><a href="#order">Order</a></li>
+                        <li><a href="https://createabeautifulworld.org/extraordinarylistening/books.html" target="_blank" rel="noopener noreferrer">All Books & Videos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

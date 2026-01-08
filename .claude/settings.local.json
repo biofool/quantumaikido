@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl:*)",
+      "WebFetch(domain:createabeautifulworld.org)",
+      "Bash(dir \"C:\\\\Users\\\\sensie-ok\\\\Downloads\\\\quantuamaikido.com\\\\*.pdf\")",
+      "Bash(magick:*)",
+      "Bash(powershell -Command \"Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\(''C:\\\\Users\\\\sensie-ok\\\\Pictures\\\\YinYanBelt.png''\\); $icon = [System.Drawing.Icon]::FromHandle\\(\\([System.Drawing.Bitmap]$img\\).GetHicon\\(\\)\\); $fs = [System.IO.File]::Create\\(''C:\\\\Users\\\\sensie-ok\\\\Downloads\\\\quantuamaikido.com\\\\favicon.ico''\\); $icon.Save\\($fs\\); $fs.Close\\(\\); $icon.Dispose\\(\\); $img.Dispose\\(\\); Write-Host ''Done''\")",
+      "Bash(powershell:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}
